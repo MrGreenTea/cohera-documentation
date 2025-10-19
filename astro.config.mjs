@@ -18,6 +18,10 @@ export default defineConfig({
       ],
       sidebar: [
         {
+          label: "Start Here",
+          slug: "start-here",
+        },
+        {
           label: "Guides",
           items: [
             // Each item here is one entry in the navigation menu.
