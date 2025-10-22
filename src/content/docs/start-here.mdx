@@ -48,6 +48,64 @@ This will create a new [project directory](/guides/project-structure/) with all 
 
 During the setup process, you'll be prompted to select which modules to include. See [Choose your modules](#choose-your-modules) below for details on the available options.
 
+### Choose your modules
+
+During project creation, you'll be prompted to select which modules to include in your platform. You can select any combination of modules, or none at all to start with a minimal base.
+
+#### Available Modules
+
+- **[Chat](/reference/modules/chat/)** - Real-time messaging and conversations
+- **[User Profiles](/reference/modules/user-profiles/)** - Member profiles and user management
+- **[Posts](/reference/modules/posts/)** - Content publishing and feeds
+- **[Calendar](/reference/modules/calendar/)** - Event scheduling and calendar management
+- **[Map](/reference/modules/map/)** - Location-based features and geographic data
+- **[Media Library](/reference/modules/media-library/)** - File uploads, storage, and media management
+
+Use the arrow keys to navigate, space to select/deselect, and enter to confirm your choices.
+
+:::tip
+If you're not sure which modules you need, you can start with none and add them as your platform requirements become clearer.
+:::
+
+#### Modifying modules later
+
+You can add or remove modules at any time by running:
+
+<Tabs syncKey="pkg">
+<TabItem label="npm">
+
+```sh
+npx cohera module add
+```
+
+</TabItem>
+<TabItem label="pnpm">
+
+```sh
+pnpm cohera module add
+```
+
+</TabItem>
+<TabItem label="Yarn">
+
+```sh
+yarn cohera module add
+```
+
+</TabItem>
+
+<TabItem label="bun">
+
+```sh
+bun cohera module add
+```
+
+</TabItem>
+
+</Tabs>
+
+This will show the same module selection interface with your current selections pre-checked.
+
 ### Start the development server
 
 When working locally, Cohera's development server lets you preview your work and automatically refreshes your browser when you make changes.
