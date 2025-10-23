@@ -6,6 +6,7 @@ import cloudflare from "@astrojs/cloudflare";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://cohera-documentation.mrlordalfred-309.workers.dev",
   integrations: [
     starlight({
       title: "My Docs",
@@ -32,5 +33,5 @@ export default defineConfig({
     }),
   ],
 
-  adapter: cloudflare(),
+  adapter: cloudflare({ imageService: "compile" }),
 });
