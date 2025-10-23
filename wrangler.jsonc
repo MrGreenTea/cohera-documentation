@@ -1,0 +1,9 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cohera-documentation",
+  // Update to today's date
+  "compatibility_date": "2025-10-23",
+  "assets": {
+    "directory": "./dist",
+  },
+}
