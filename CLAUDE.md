@@ -8,6 +8,13 @@ We're using the [Diátaxis model](https://diataxis.fr/) for documentation struct
 - four kinds are: tutorials, how-to guides, reference and explanation
 - our focus: tutorials and how-to guides
 
+| If the content…   | …and serves the user's… | …then it must belong to… |
+| ----------------- | ----------------------- | ------------------------ |
+| informs action    | acquisition of skill    | a tutorial               |
+| informs action    | application of skill    | a how-to guide           |
+| informs cognition | application of skill    | reference                |
+| informs cognition | acquisition of skill    | explanation              |
+
 ### Tutorials
 
 > A tutorial is a lesson, that takes a student by the hand through a learning experience. A tutorial is always practical: the user does something, under the guidance of an instructor. A tutorial is designed around an encounter that the learner can make sense of, in which the instructor is responsible for the learner’s safety and success.
