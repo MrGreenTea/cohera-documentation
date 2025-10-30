@@ -16,92 +16,81 @@ hero:
 
 import { Card, CardGrid } from "@astrojs/starlight/components";
 
-## Communities Deserve Tools That Fit
+## The Problem
 
-Every community is unique. A 200-person housing cooperative has different needs than a 50-member youth organization or a 1,500-person community project. Yet they all face the same choice: use mass-market platforms designed for everyone (and thus no one in particular), or invest massive resources building custom software.
+Every community is unique. Yet they face the same false choice: use mass-market platforms designed for everyone (and thus no one in particular), or invest massive resources building custom software.
 
-We believe this is wrong. Communities - especially small-to-medium purpose-driven organizations - deserve tools that respect their uniqueness. They deserve to control their data, customize their platforms to their specific needs, and connect across organizational boundaries when it serves them.
+Communities of 20 to 200 people are caught in the gap. Too specific for mass-market platforms. Too small to justify custom builds.
 
-Cohera exists to make situated software practical. We're building a library of community-focused building blocks that developers can compose, customize, and extend to create platforms tailored to specific communities. Not platforms designed for the lowest common denominator. Not rigid solutions that force communities to adapt. But flexible tools that adapt to communities.
+They end up stitching spreadsheets and chat logs together just to stay organized.
+
+Mass-market platforms like Facebook, Slack, and Discord serve the lowest common denominator. They force workflows that don't fit. They lock data behind proprietary walls. They can't be customized beyond superficial theming.
+
+The alternative -- building custom software -- is economically impossible for most civil society organizations. Developers capable of building community platforms cost more than these organizations can justify.
+
+The long tail of community needs goes unserved not because the need doesn't exist, but because it's not profitable to serve.
+
+## What Cohera Is
+
+Cohera is a library of building blocks for community platforms. Developers compose pre-built components, customize them, and deploy platforms tailored to specific communities. Custom-built without the months of development time.
+
+The building blocks span the full stack: backend modules for handling logic and data, web frontend components for browser-based interfaces, mobile frontend components for iOS and Android apps, and data models that ensure interoperability. Each module is composed of these independent pieces -- developers choose which they need and ignore the rest.
+
+A community might combine calendar functionality with messaging and member profiles to coordinate shared spaces. Or event management with file sharing and voting for community decision-making. Each module works independently but integrates seamlessly when combined.
+
+Instead of starting from scratch or settling for generic solutions, developers compose the components they need, then customize them to fit their community's unique needs. Platforms feel custom-built because they are -- but the common patterns are already solved.
+
+## Why Existing Solutions Fall Short
+
+Mass-market platforms are built for billions. They serve no one in particular. Can't be customized beyond superficial theming. Lock data behind proprietary walls.
+
+Federated platforms like Mastodon and Diaspora are purpose-built for specific use cases and resist adaptation to different needs.
+
+Component libraries like TailwindUI focus on enterprise requirements -- forms, tables, dashboards. Not community-specific features like discussion threads, event coordination, or member directories.
+
+What's missing is a middle ground: building blocks designed specifically for community platforms, flexible enough to adapt to situated needs, built for federation from the ground up, and economically accessible to civil society organizations.
 
 ## Our Values
 
 <CardGrid stagger>
-  <Card title="Community Sovereignty" icon="star">
-    Organizations own their data and their platforms. No vendor lock-in, no data
-    held hostage. Your community, your rules.
+  <Card title="Built for True Community" icon="heart">
+    Real communities of 20-200 people have unique needs that mass-market
+    platforms ignore. Cohera is designed for associations, cooperatives, and
+    purpose-driven organizations -- the scale where relationships matter and
+    specific needs emerge. Not billions of users. True community.
   </Card>
-  <Card title="Situated Over Generic" icon="puzzle">
-    Tools should serve specific needs, not just common ones. Every community is
-    different - your platform should reflect that.
+  <Card title="Ownership & Sovereignty" icon="star">
+    Organizations own their data, their platforms, their futures. No vendor
+    lock-in, no data held hostage, no compromises. Your community, your rules,
+    your infrastructure.
+  </Card>
+  <Card title="Adaptable by Design" icon="puzzle">
+    Every community is different -- your platform should reflect that. Compose
+    the building blocks you need, customize them to fit, extend when necessary.
+    From configuration to source-level changes, the framework adapts to you.
   </Card>
   <Card title="Federation by Choice" icon="external">
-    Every part of cohera is purpose-built for cross-platform federation.
-    Communities decide who to connect with and when.
-  </Card>
-  <Card title="Designed for Civil Society" icon="heart">
-    Built for the needs of associations, cooperatives, and community projects -
-    not enterprise profit motives.
+    Connect across boundaries when it serves you. Every component built for
+    cross-platform federation from day one. Communities decide who to connect
+    with, what to share, and when. The capability is built-in; the decision
+    remains local.
   </Card>
 </CardGrid>
 
-## The Long Tail Gets Left Behind
+## How Cohera Works
 
-There's a gap in the market for community platforms - and it's not an accident. Communities of 10 to 2,000 people have unique, specific needs that mass-market platforms ignore. Facebook, Slack, Discord, Instagram: these are built for the lowest common denominator. They serve billions by serving no one in particular.
+**Modularity First**: Every building block is fully independent. Developers pick which modules they need -- maybe just profiles and messaging for a small group, or the full suite for a larger organization. No forced dependencies, no bloat. Platforms stay lean and focused on what their community actually needs.
 
-For a housing cooperative tracking shared resources, a youth organization coordinating projects, or a community initiative managing local events, these platforms are simultaneously too much and not enough. They force workflows that don't fit. They lock data behind proprietary walls. They can't be customized beyond superficial theming.
+**Customization at Every Level**: Communities have different needs, so Cohera supports different depths of customization. Configuration options let you toggle features and behavior. Theming and styling systems provide control over appearance. Extension points and plugin systems enable adding unique functionality. And when needs truly diverge, modify the source code directly. The framework adapts -- it doesn't fight you.
 
-The alternative - building custom software - is economically impossible for most civil society organizations. Developers capable of building community platforms cost more than these organizations can justify. The long tail of community needs goes unserved not because the need doesn't exist, but because it's not profitable to serve.
+**Federation by Design**: Every module is built with cross-platform federation in mind. Posts, events, and profiles can connect across platforms. But it's always a choice -- communities decide who to connect with, what to share, and when. The capability is built-in; the decision remains local.
 
-### Existing Solutions Fall Short
+**Target Scale**: Cohera is optimized for communities of 20 to 200 people. Not enterprise scale. Not social media scale. The scale where community actually happens, where relationships matter, where specific needs emerge.
 
-Platforms like HumHub offer limited customization through plugins. Federated platforms like Mastodon and Diaspora are purpose-built for specific use cases and resist adaptation. Component libraries like tailwindui focus on enterprise needs - forms, tables, dashboards - not community-specific features like discussion threads, event coordination, or member directories.
+## Join the Vision
 
-What's missing is a middle ground: building blocks designed specifically for community platforms, flexible enough to adapt to situated needs, built for federation from the ground up, and economically accessible to civil society organizations.
+Civil society organizations are where social change happens. Associations, cooperatives, community projects -- these groups organize people around shared purpose. They deserve tools that support their work, not tools that profit from it. They deserve to own their data, control their platforms, and connect on their own terms.
 
-## Building Blocks for Situated Software
+A world where communities have the tools they need to organize effectively. Where the long tail of specific needs gets served. Where civil society has technology infrastructure that respects its values and serves its mission.
 
-Cohera is a library of community-focused building blocks that developers use to create platforms tailored to specific communities. Instead of starting from scratch or settling for generic solutions, developers compose pre-built components that handle the common patterns of community platforms - then customize them to fit their community's unique needs.
-
-The building blocks span the full stack: backend modules for handling logic and data, web frontend components for browser-based interfaces, mobile frontend components for iOS and Android apps, and data models that ensure interoperability. Each module is composed of these independent pieces - developers choose which they need (backend only, web only, mobile only, or any combination) and ignore the rest.
-
-Cohera provides modules for core community functions - things like real-time chat and messaging, member profiles and directories, and more. Each module is designed to work independently but integrate seamlessly when combined. (See the [modules overview](/reference/modules/) for the complete list.)
-
-### Customization at Every Level
-
-- **Configuration**: Pre-defined options for common variations
-- **Theming**: Customize styling and visual identity
-- **Extension**: Hooks and plugins for unique functionality
-- **Source modification**: Direct code changes when needs truly diverge
-
-This flexibility is essential for situated software - there's no "one size fits all" when every community is different.
-
-### Target Scale
-
-The target is clear: communities of 20 to 200 people. Not enterprise scale. Not social media scale. The scale where community actually happens, where relationships matter, where specific needs emerge. Cohera is optimized for this scale - both technically and philosophically.
-
-## Compose, Customize, Connect
-
-Cohera's approach is simple: start with the blocks you need, customize them to fit your community, and connect with other communities when it makes sense.
-
-**Modularity First**: Every building block is fully independent. Developers pick which modules they need - maybe just chat and profiles for a small group, or the full suite for a larger organization. There are no forced dependencies, no features you must include. This means platforms stay lean and focused on what their community actually needs.
-
-**Customization at Every Level**: Communities have different needs, so cohera supports different depths of customization. For common variations, configuration options let developers toggle features and behavior. For visual identity, theming and styling systems provide control over appearance. For unique requirements, extension points and plugin systems enable adding new functionality. And when a community's needs truly diverge, developers can modify the source code directly. The framework doesn't fight you - it adapts.
-
-**Federation by Design**: Every module is built with cross-platform federation in mind. A post created in one cohera-based platform can appear in another. Events can be shared across organizational boundaries. Member profiles can connect between communities. But federation is always a choice - communities decide who they connect with, what they share, and when. The capability is built-in; the decision remains local.
-
-The result is platforms that feel custom-built because they are, but without the months of development time. Developers focus on their community's unique needs instead of reinventing chat systems and user authentication.
-
-**Our measure of success**: People won't even notice the platform was built with cohera. Communities will adapt and customize it so thoroughly that it feels like a native extension of themselves.
-
-## Building for Real Communities, Enabling the Long Tail
-
-Our immediate goal is concrete: build platforms for the communities we're working with - real organizations with real needs that existing tools don't meet. Success means they have platforms that work for them, not platforms they have to work around.
-
-But the impact goes beyond these first communities. Every platform built with cohera validates the model and makes the next one easier. The building blocks improve. The patterns clarify. The federation network grows. What starts as custom platforms for a handful of organizations becomes infrastructure for the long tail of community needs.
-
-This matters because civil society organizations are where social change happens. Associations, cooperatives, community projects - these groups organize people around shared purpose. They deserve tools that support their work, not tools that profit from it. They deserve to own their data, control their platforms, and connect on their own terms.
-
-Cohera enables this by making situated software economically viable. Developers can build custom platforms in days or weeks instead of months. Communities can start small and grow. Organizations can adapt their platforms as their needs evolve. And when it makes sense, communities can federate - sharing resources, coordinating across boundaries, building networks of mutual support.
-
-**The vision is simple**: a world where communities have the tools they need to organize effectively, where the long tail of specific needs gets served, where civil society has technology infrastructure that respects its values and serves its mission.
+This is what we're building. Help us make it real.
