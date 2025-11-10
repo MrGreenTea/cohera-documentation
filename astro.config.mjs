@@ -9,12 +9,12 @@ export default defineConfig({
   site: "https://cohera-documentation.mrlordalfred-309.workers.dev",
   integrations: [
     starlight({
-      title: "My Docs",
+      title: "Cohera",
       social: [
         {
           icon: "github",
           label: "GitHub",
-          href: "https://github.com/withastro/starlight",
+          href: "https://github.com/cohera-community/cohera-documentation/",
         },
       ],
       sidebar: [

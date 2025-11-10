@@ -1,40 +1,132 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
-template: splash # Remove or comment out this line to display the site sidebar on this page.
+title: Cohera
+description: A library of building blocks for community platforms that respect your uniqueness.
+template: splash
 hero:
-  tagline: Congrats on setting up a new Starlight project!
+  title: Your community, your way.
+  tagline: Building blocks for true community.
   image:
-    file: ../../assets/houston.webp
+    file: ../../assets/icon.png
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: Get Started
+      link: /start-here/
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
-      icon: external
+    - text: View Modules
+      link: /reference/modules/
+      icon: open-book
       variant: minimal
 ---
 
-import { Card, CardGrid } from "@astrojs/starlight/components";
+import { Card, CardGrid, Steps } from "@astrojs/starlight/components";
 
-## Next steps
+## The Problem
+
+Every community is unique.
+Yet they face the same false choice:
+use mass-market platforms designed for everyone (and thus no one in particular),
+or invest massive resources building custom software.
+
+True Communities are caught in the gap.
+Too specific for mass-market platforms.
+Too small to justify custom builds.
+They end up stitching spreadsheets and chat logs together just to stay organized.
+
+Mass-market platforms serve the lowest common denominator.
+They force workflows that don't fit.
+They lock data behind proprietary walls.
+They can't be customized beyond superficial theming.
+
+The alternative -- building custom software -- is economically impossible for most civil organizations.
+Developers capable of building community platforms cost more than these organizations can justify.
+The long tail of community needs goes unserved not because the need doesn't exist,
+but because it's not profitable to serve.
+
+## What Cohera Is
+
+Cohera is a library of building blocks for community platforms.
+Developers compose pre-built components, customize them, and deploy platforms tailored to specific communities.
+Custom-built without the months of development time.
+
+The building blocks span the full stack: backend modules for handling logic and data,
+web frontend components for browser-based interfaces, mobile frontend components for iOS and Android apps,
+and data models that ensure interoperability.
+Each module is composed of these independent pieces -- developers choose which they need and ignore the rest.
+
+A community might combine calendar functionality with messaging and member profiles to coordinate shared spaces.
+Or event management with file sharing and voting for community decision-making.
+Each module works independently but integrates seamlessly when combined.
+
+Instead of starting from scratch or settling for generic solutions,
+developers compose the components they need,
+then customize them to fit their community's unique needs.
+Platforms feel custom-built because they are -- but the common patterns are already solved.
+
+## Why Existing Solutions Fall Short
+
+Mass-market platforms are built for billions. They serve no one in particular,
+can't be customized beyond superficial theming. They lock data behind proprietary walls.
+Federated platforms are purpose-built for specific use cases and resist adaptation to different needs.
+
+Existing component libraries focus on enterprise requirements -- forms, tables, dashboards.
+Not community-specific features like discussion threads, event coordination, or member directories.
+
+What's missing is a middle ground: building blocks designed specifically for community platforms, flexible enough to adapt to situated needs, built for federation from the ground up, and economically accessible to civil society organizations.
+
+## Our Values
 
 <CardGrid stagger>
-  <Card title="Update content" icon="pencil">
-    Edit `src/content/docs/index.mdx` to see this page change.
+  <Card title="Built for True Community" icon="heart">
+    Real communities of 20-200 people have unique needs that mass-market
+    platforms ignore. Cohera is designed for associations, cooperatives, and
+    purpose-driven organizations -- the scale where relationships matter and
+    specific needs emerge. Not billions of users. True community.
   </Card>
-  <Card title="Change page layout" icon="document">
-    Delete `template: splash` in `src/content/docs/index.mdx` to display a
-    sidebar on this page.
+  <Card title="Ownership & Sovereignty" icon="star">
+    Organizations own their data, their platforms, their futures. No vendor
+    lock-in, no data held hostage, no compromises. Your community, your rules,
+    your infrastructure.
   </Card>
-  <Card title="Add new content" icon="add-document">
-    Add Markdown or MDX files to `src/content/docs` to create new pages.
+  <Card title="Adaptable by Design" icon="puzzle">
+    Every community is different -- your platform should reflect that. Compose
+    the building blocks you need, customize them to fit, extend when necessary.
+    From configuration to source-level changes, the framework adapts to you.
   </Card>
-  <Card title="Configure your site" icon="setting">
-    Edit your `sidebar` and other config in `astro.config.mjs`.
-  </Card>
-  <Card title="Read the docs" icon="open-book">
-    Learn more in [the Starlight Docs](https://starlight.astro.build/).
+  <Card title="Federation by Choice" icon="external">
+    Connect across boundaries when it serves you. Every component built for
+    cross-platform federation from day one. Communities decide who to connect
+    with, what to share, and when. The capability is built-in; the decision
+    remains local.
   </Card>
 </CardGrid>
+
+## How Cohera Works
+
+<Steps>
+
+1. **Modularity First**
+
+   Every building block is independent. Pull in only the profiles, messaging, or coordination modules you need and leave the rest.
+
+2. **Customization at Every Level**
+
+   Configure behavior, restyle the interface, extend with plugins, or edit source directly. Cohera adapts instead of resisting.
+
+3. **Federation by Design**
+
+   Posts, events, and profiles can connect across platforms when communities choose to share. Interoperability is built-in, not bolted on.
+
+4. **Target Scale**
+
+   Optimized for communities of 20 to 200 people: the range where relationships are personal and needs are specific.
+
+</Steps>
+
+## Join the Vision
+
+Civil society organizations are where social change happens. Associations, cooperatives, community projects -- these groups organize people around shared purpose. They deserve tools that support their work, not tools that profit from it. They deserve to own their data, control their platforms, and connect on their own terms.
+
+A world where communities have the tools they need to organize effectively.
+Where the long tail of specific needs gets served.
+Where civil society has technology infrastructure that respects its values and serves its mission.
+
+This is what we're building. Make it real with us.
