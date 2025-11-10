@@ -3,6 +3,8 @@
 This is the documentation for a community platform framework.
 We're using the [Diátaxis model](https://diataxis.fr/) for documentation structure.
 
+IMPORTANT: Cohera does not exist yet. We're writing the documentation as if it exists though.
+
 ## Diátaxis
 
 - four kinds are: tutorials, how-to guides, reference and explanation
