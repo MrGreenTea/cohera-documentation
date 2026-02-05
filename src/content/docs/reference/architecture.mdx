@@ -270,16 +270,26 @@ uses [fedify](https://fedify.dev/)
 ### Module Integration
 
 ```typescript
-create: t.procedure
-  .input(z.object({ title: z.string(), content: z.string() }))
-  .mutation(async ({ input, ctx }) => {
-    const post = await ctx.db.insert(posts).values(input).returning();
+import * as v from "valibot";
+import { command } from "$app/server";
+import { posts } from "@cohera/posts/db";
+import { db } from "$lib/server/db";
+import { federation } from "$lib/server/federation";
 
-    await ctx.federation?.announce({
+export const createPost = command(
+  v.object({ title: v.string(), content: v.string() }),
+  async ({ title, content }) => {
+    const [post] = await db
+      .insert(posts)
+      .values({ title, content })
+      .returning();
+
+    await federation?.announce({
       type: "Create",
       object: { type: "Note", ...post },
     });
 
     return post;
-  });
+  }
+);
 ```
