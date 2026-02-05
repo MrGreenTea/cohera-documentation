@@ -1,10 +1,9 @@
-import { trpc } from "$lib/trpc/client";
+import { listEvents, listPosts } from "$lib/remote/cohera.remote";
 import type { PageLoad } from "./$types";
 
-export const load: PageLoad = async (event) => {
-  const client = trpc(event);
+export const load: PageLoad = async () => {
   return {
-    posts: await client.posts.list.query(),
-    events: await client.events.list.query(),
+    posts: await listPosts(),
+    events: await listEvents(),
   };
 };

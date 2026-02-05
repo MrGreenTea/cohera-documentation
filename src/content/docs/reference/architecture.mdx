@@ -8,7 +8,7 @@ import { Code, Steps, FileTree } from "@astrojs/starlight/components";
 import postSchemaCode from "../../../examples/architecture/database/posts_schema.ts?raw";
 import installModulesCode from "../../../examples/architecture/integration/install-modules.sh?raw";
 import dbCode from "../../../examples/architecture/integration/schema.ts?raw";
-import trpcCode from "../../../examples/architecture/integration/trpc.ts?raw";
+import remoteFunctionsCode from "../../../examples/architecture/integration/remote-functions.remote.ts?raw";
 import loadCode from "../../../examples/architecture/integration/load.ts?raw";
 import frontendCode from "../../../examples/architecture/integration/frontend.svelte?raw";
 
@@ -36,9 +36,9 @@ For quick reference definitions of key terms used throughout this document, see 
 We built on these awesome technologies:
 
 - **Frontend**: SvelteKit & `shadcn-svelte`
-- **Backend**: tRPC (or [experimental remote functions](https://svelte.dev/docs/kit/remote-functions)?)
+- **Backend**: SvelteKit [experimental remote functions](https://svelte.dev/docs/kit/remote-functions) (`query`, `form`, `command`)
 - **Database**: PostgreSQL via Drizzle ORM
-- **Type Safety**: TypeScript via tRPC & drizzle
+- **Type Safety**: TypeScript via remote functions & Drizzle
 - **Federation**: fedify (optional)
 - **Mobile**: Capacitor (optional)
 
@@ -72,10 +72,10 @@ Here's how developers build a platform with Cohera:
    :::
 
    <Code
-     code={trpcCode}
-     ins={[1, 2, 5, 6]}
+     code={remoteFunctionsCode}
+     ins={[1, 2]}
      lang="typescript"
-     title="src/lib/server/trpc.ts"
+     title="src/lib/remote/cohera.remote.ts"
    />
 
 3. Use in [Frontend](#frontend-layer)
@@ -102,7 +102,7 @@ Each Cohera module is a single npm package with structured exports:
 <FileTree>
 
 - @cohera/posts/
-  - [api](#backend-layer) tRPC routers and procedures (backend)
+  - [api](#backend-layer) SvelteKit remote functions (backend)
   - [ui](#frontend-layer) Svelte components (frontend)
   - [db](#database-layer) Drizzle schemas and migrations (data)
   - types Shared TypeScript types
@@ -112,8 +112,8 @@ Each Cohera module is a single npm package with structured exports:
 ### Example Usage
 
 ```typescript
-// Backend: Add router to your tRPC app
-import { postsRouter } from "@cohera/posts/api";
+// Backend: Import remote functions
+import { listPosts, createPost } from "@cohera/posts/api";
 
 // Frontend: Use Svelte components
 import { PostCard, PostList } from "@cohera/posts/ui";
@@ -134,46 +134,50 @@ This structure provides:
 
 ## Backend Layer
 
-The backend layer consists of tRPC routers that handle business logic and data access.
+The backend layer uses SvelteKit [remote functions](https://svelte.dev/docs/kit/remote-functions) (`query`, `form`, `command`, `prerender`) to handle business logic and data access. Because remote functions are experimental, Cohera projects enable `kit.experimental.remoteFunctions` and (when using `await` in components) `compilerOptions.experimental.async`.
 
-### Router Structure
+### Remote Function Structure
 
 ```typescript
-export const postsRouter = t.router({
-  list: t.procedure
-    .input(z.object({ limit: z.number().optional() }))
-    .query(async ({ input, ctx }) => {
-      return ctx.db
-        .select()
-        .from(posts)
-        .limit(input.limit ?? 10);
-    }),
+import * as v from "valibot";
+import { command, query } from "$app/server";
+import { posts } from "@cohera/posts/db";
+import { db } from "$lib/server/db";
+import { federation } from "$lib/server/federation";
 
-  create: t.procedure
-    .input(z.object({ title: z.string(), content: z.string() }))
-    .mutation(async ({ input, ctx }) => {
-      const post = await ctx.db.insert(posts).values(input).returning();
-      await ctx.federation?.announce(post);
-      return post;
-    }),
+export const listPosts = query(async () => {
+  return db.select().from(posts).limit(10);
 });
+
+export const createPost = command(
+  v.object({ title: v.string(), content: v.string() }),
+  async ({ title, content }) => {
+    const [post] = await db
+      .insert(posts)
+      .values({ title, content })
+      .returning();
+
+    await federation?.announce(post);
+    return post;
+  }
+);
 ```
 
 ### Key Characteristics
 
-- Each module provides its own tRPC router
-- Routers compose into your main app's router
+- Each module provides `.remote.ts` functions (query/form/command/prerender)
+- Functions run on the server and can use server-only modules
+- Arguments are validated with Standard Schema libraries like Valibot
 - Database access via Drizzle ORM (Postgres)
-- Context includes `db` instance and optional `federation` service
-- Types automatically inferred for frontend use
+- Types are inferred for frontend use through remote function signatures
 
 ### Independence
 
-You can use module routers in several ways:
+You can use module remote functions in several ways:
 
-- Import complete router in your tRPC app
-- Use only specific procedures you need
-- Build custom backend implementing the same type contracts
+- Import remote functions directly from a module package
+- Re-export them from an app-level `.remote.ts` file for convenience
+- Build a custom backend that implements the same type contracts
 
 ## Frontend Layer
 
@@ -219,7 +223,7 @@ Real components of course are more complex, feature-complete and better styled.
 ### Key Characteristics
 
 - Components are presentation-focused (data passed as props)
-- Don't directly call tRPC - parent handles data fetching
+- Don't directly call remote functions - parent handles data fetching
 - Type-safe props using shared types from `/types` export
 - Tailwind allows [theming](guides/theming)
 - Work with any backend matching the type contract
