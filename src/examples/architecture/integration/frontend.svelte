@@ -1,22 +1,19 @@
 <script lang="ts">
   import { PostCard } from "@cohera/posts/ui";
   import { EventCard } from "@cohera/events/ui";
-
-  import type { PageProps } from "./$types";
-
-  let { data }: PageProps = $props();
+  import { listEvents, listPosts } from "$lib/remote/cohera.remote";
 </script>
 
 <section>
   <h2>Recent Posts</h2>
-  {#each $data.posts as post (post.id)}
+  {#each await listPosts() as post (post.id)}
     <PostCard {post} />
   {/each}
 </section>
 
 <section>
   <h2>Upcoming Events</h2>
-  {#each $data.events as event (event.id)}
+  {#each await listEvents() as event (event.id)}
     <EventCard {event} />
   {/each}
 </section>

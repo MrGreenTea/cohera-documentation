@@ -9,7 +9,6 @@ import postSchemaCode from "../../../examples/architecture/database/posts_schema
 import installModulesCode from "../../../examples/architecture/integration/install-modules.sh?raw";
 import dbCode from "../../../examples/architecture/integration/schema.ts?raw";
 import remoteFunctionsCode from "../../../examples/architecture/integration/remote-functions.remote.ts?raw";
-import loadCode from "../../../examples/architecture/integration/load.ts?raw";
 import frontendCode from "../../../examples/architecture/integration/frontend.svelte?raw";
 
 Cohera is designed as a library of loosely coupled [modules](/reference/modules) that developers compose to build community platforms. Each module bundles its frontend, backend, and data layers while maintaining independence between these layers.
@@ -84,7 +83,8 @@ Here's how developers build a platform with Cohera:
    Should routes be auto created / included in modules?
    :::
 
-   <Code code={loadCode} lang="typescript" title="routes/+page.ts" />
+   Remote functions can be awaited directly inside route components.
+
    <Code code={frontendCode} lang="svelte" title="routes/+page.svelte" />
 
 4. Deploy
