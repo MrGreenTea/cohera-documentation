@@ -13,21 +13,45 @@ const { label } = Astro.props;
 
 <style>
   .component-preview {
-    padding: 1rem;
-    background-color: var(--sl-color-gray-6);
-    border: 1px solid var(--sl-color-gray-5);
-    border-radius: 8px;
-    margin: 1rem 0;
+    --preview-bg: var(--sl-color-gray-6);
+    --preview-border: var(--sl-color-gray-5);
+    --preview-accent: var(--sl-color-accent);
+
+    padding: 1.25rem;
+    background: linear-gradient(135deg, var(--sl-color-black), var(--preview-bg));
+    border: 1px solid var(--preview-border);
+    border-radius: 18px;
+    margin: 1.25rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .component-preview::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--preview-accent) 12%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--preview-accent) 12%, transparent) 1px,
+        transparent 1px
+      );
+    background-size: 24px 24px;
+    opacity: 0.2;
+    pointer-events: none;
   }
 
   .preview-label {
-    font-size: 0.875rem;
-    font-weight: 600;
+    font-size: 0.75rem;
+    font-weight: 700;
     color: var(--sl-color-text);
-    margin-bottom: 0.75rem;
-    font-family:
-      system-ui,
-      -apple-system,
-      sans-serif;
+    margin-bottom: 0.85rem;
+    font-family: "Manrope", "Segoe UI", sans-serif;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
   }
 </style>

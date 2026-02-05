@@ -36,42 +36,64 @@ const isHighlighted = (emoji: string) => {
 
 <style>
   .reaction-picker {
+    --picker-bg: var(--sl-color-gray-6);
+    --picker-border: var(--sl-color-gray-5);
+    --picker-ink: var(--sl-color-text);
+    --picker-muted: var(--sl-color-gray-3);
+    --picker-accent: var(--sl-color-accent);
+
     display: flex;
-    gap: 8px;
+    gap: 10px;
     flex-wrap: wrap;
-    font-family:
-      system-ui,
-      -apple-system,
-      sans-serif;
+    padding: 12px;
+    border-radius: 16px;
+    background: linear-gradient(160deg, var(--sl-color-black), var(--picker-bg));
+    border: 1px solid var(--picker-border);
+    font-family: "Manrope", "Segoe UI", sans-serif;
   }
 
   .reaction-button {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 4px;
-    padding: 6px 12px;
-    border: 1px solid var(--sl-color-hairline-light);
-    border-radius: 16px;
-    background-color: var(--sl-color-black);
+    gap: 6px;
+    padding: 6px 14px;
+    border: 1px solid var(--picker-border);
+    border-radius: 999px;
+    background: var(--sl-color-black);
     cursor: pointer;
     font-size: 14px;
-    transition: all 0.2s;
-    min-width: 52px;
+    transition: transform 0.2s ease, border-color 0.2s ease,
+      background-color 0.2s ease;
+    min-width: 62px;
+    justify-content: center;
   }
 
   .reaction-button.highlighted {
-    background-color: var(--sl-color-accent-low);
-    border-color: var(--sl-color-accent);
+    background: color-mix(
+      in srgb,
+      var(--picker-accent) 22%,
+      var(--sl-color-black)
+    );
+    border-color: color-mix(in srgb, var(--picker-accent) 60%, transparent);
   }
 
   .reaction-button:hover {
-    background-color: var(--sl-color-gray-6);
-    border-color: var(--sl-color-accent);
+    background: color-mix(in srgb, var(--picker-accent) 12%, var(--sl-color-black));
+    border-color: var(--picker-accent);
     transform: translateY(-1px);
   }
 
   .reaction-button.highlighted:hover {
-    background-color: var(--sl-color-accent-low);
+    background: color-mix(
+      in srgb,
+      var(--picker-accent) 28%,
+      var(--sl-color-black)
+    );
+  }
+
+  .reaction-button:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--picker-accent) 70%, white);
+    outline-offset: 2px;
   }
 
   .emoji {
@@ -81,11 +103,21 @@ const isHighlighted = (emoji: string) => {
 
   .count {
     font-size: 12px;
-    color: var(--sl-color-gray-3);
-    font-weight: 500;
+    color: var(--picker-muted);
+    font-weight: 600;
   }
 
   .reaction-button.highlighted .count {
-    color: var(--sl-color-accent);
+    color: var(--picker-ink);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reaction-button {
+      transition: none;
+    }
+
+    .reaction-button:hover {
+      transform: none;
+    }
   }
 </style>

@@ -76,21 +76,24 @@ const contentParts = renderContent(content);
 ---
 
 <div class="post-container not-content">
-  <!-- Header: Author and timestamp -->
   <div class="post-header">
-    <div class="avatar">
-      {author.charAt(0).toUpperCase()}
+    <div class="author-block">
+      <div class="avatar">
+        {author.charAt(0).toUpperCase()}
+      </div>
+      <div class="author-meta">
+        <div class="author-name">{author}</div>
+        <div class="author-subtitle">Community post</div>
+      </div>
     </div>
-    <div>
-      <div class="author-name">{author}</div>
-      <div class="timestamp">{timestamp}</div>
+    <div class="post-meta">
+      <span class="meta-label">Post</span>
+      <span class="timestamp">{timestamp}</span>
     </div>
   </div>
 
-  <!-- Post image (if provided) -->
   {image && <img src={image} alt="" class="post-image" />}
 
-  <!-- YouTube embed (if URL provided) -->
   {
     youtubeId && (
       <div class="youtube-embed">
@@ -104,7 +107,6 @@ const contentParts = renderContent(content);
     )
   }
 
-  <!-- GitHub link preview (if GitHub URL provided) -->
   {
     githubInfo && (
       <a
@@ -126,11 +128,11 @@ const contentParts = renderContent(content);
           <div class="github-owner">{githubInfo.owner}</div>
           <div class="github-repo">{githubInfo.repo}</div>
         </div>
+        <div class="github-action">View on GitHub →</div>
       </a>
     )
   }
 
-  <!-- Event card (if event provided) -->
   {
     event && (
       <div class="event-card">
@@ -175,7 +177,6 @@ const contentParts = renderContent(content);
     )
   }
 
-  <!-- Post content with @mentions -->
   <div class="post-content">
     {
       contentParts.map((part) =>
@@ -190,129 +191,188 @@ const contentParts = renderContent(content);
     }
   </div>
 
-  <!-- Reactions -->
-  {
-    reactions?.length > 0 && (
-      <div class="reactions">
-        {reactions.map((emoji) => (
-          <button
-            class:list={[
-              "reaction-button",
-              emoji === selectedReaction && "highlighted",
-            ]}
-          >
-            <span>{emoji}</span>
-            <span class="count">{random(1, 9)}</span>
-          </button>
-        ))}
-      </div>
-    )
-  }
+  <div class="post-footer">
+    {
+      reactions?.length > 0 && (
+        <div class="reactions">
+          {reactions.map((emoji) => (
+            <button
+              class:list={[
+                "reaction-button",
+                emoji === selectedReaction && "highlighted",
+              ]}
+            >
+              <span class="emoji">{emoji}</span>
+              <span class="count">{random(1, 9)}</span>
+            </button>
+          ))}
+        </div>
+      )
+    }
 
-  <!-- Comment count -->
-  {
-    commentCount > 0 && (
-      <div class="comment-count">
-        💬 {commentCount} {commentCount === 1 ? "comment" : "comments"}
-      </div>
-    )
-  }
+    {
+      commentCount > 0 && (
+        <div class="comment-count">
+          💬 {commentCount} {commentCount === 1 ? "comment" : "comments"}
+        </div>
+      )
+    }
+  </div>
 </div>
 
 <style>
   .post-container {
-    border: 1px solid var(--sl-color-hairline-light);
-    border-radius: 8px;
-    padding: 16px;
-    background-color: var(--sl-color-black);
-    font-family:
-      system-ui,
-      -apple-system,
-      sans-serif;
-    max-width: 600px;
+    --post-bg: var(--sl-color-gray-6);
+    --post-border: var(--sl-color-gray-5);
+    --post-ink: var(--sl-color-text);
+    --post-muted: var(--sl-color-gray-3);
+    --post-accent: var(--sl-color-accent);
+    --post-surface: var(--sl-color-black);
+
+    border: 1px solid var(--post-border);
+    border-radius: 18px;
+    padding: 20px;
+    background: linear-gradient(160deg, var(--post-surface), var(--post-bg));
+    font-family: "Manrope", "Segoe UI", sans-serif;
+    max-width: 640px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+  }
+
+  .post-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      600px circle at top left,
+      color-mix(in srgb, var(--post-accent) 18%, transparent),
+      transparent 55%
+    );
+    opacity: 0.6;
+    pointer-events: none;
   }
 
   .post-header {
     display: flex;
     align-items: center;
-    margin-bottom: 12px;
-    gap: 8px;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    gap: 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .author-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
 
   .avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background-color: var(--sl-color-accent);
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: var(--post-accent);
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--sl-color-text-invert);
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 700;
+    box-shadow: 0 6px 16px
+      color-mix(in srgb, var(--post-accent) 40%, transparent);
   }
 
   .author-name {
+    font-family: "Fraunces", "Iowan Old Style", serif;
     font-weight: 600;
-    font-size: 14px;
-    color: var(--sl-color-text);
+    font-size: 16px;
+    color: var(--post-ink);
+    letter-spacing: 0.01em;
+  }
+
+  .author-subtitle {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--post-muted);
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  .meta-label {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-weight: 600;
+    color: var(--post-accent);
   }
 
   .timestamp {
-    font-size: 12px;
-    color: var(--sl-color-gray-3);
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--post-accent) 20%, transparent);
+    color: var(--post-ink);
+    font-weight: 600;
   }
 
   .post-image {
     width: 100%;
-    max-width: 600px;
+    max-width: 640px;
     height: auto;
-    border-radius: 8px;
-    margin-bottom: 12px;
+    border-radius: 14px;
+    margin-bottom: 14px;
     display: block;
+    border: 1px solid var(--post-border);
   }
 
   .youtube-embed {
     position: relative;
     width: 100%;
-    max-width: 600px;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
-    margin-bottom: 12px;
-    border-radius: 8px;
+    max-width: 640px;
+    padding-bottom: 56.25%;
+    margin-bottom: 14px;
+    border-radius: 14px;
     overflow: hidden;
+    border: 1px solid var(--post-border);
+    background: var(--post-surface);
   }
 
   .youtube-embed iframe {
     position: absolute;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100%;
     height: 100%;
-    border-radius: 8px;
+    border-radius: 14px;
   }
 
   .github-preview {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: auto 1fr;
     gap: 12px;
-    padding: 12px;
-    margin-bottom: 12px;
-    border: 1px solid var(--sl-color-hairline-light);
-    border-radius: 8px;
-    background-color: var(--sl-color-gray-6);
+    padding: 14px;
+    margin-bottom: 14px;
+    border: 1px solid var(--post-border);
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--post-surface) 70%, var(--post-bg));
     text-decoration: none;
-    transition: all 0.2s;
+    transition: transform 0.2s ease, border-color 0.2s ease;
   }
 
   .github-preview:hover {
-    background-color: var(--sl-color-hairline-light);
-    border-color: var(--sl-color-accent);
+    transform: translateY(-2px);
+    border-color: var(--post-accent);
   }
 
   .github-icon {
-    width: 32px;
-    height: 32px;
-    color: var(--sl-color-text);
+    width: 34px;
+    height: 34px;
+    color: var(--post-ink);
     flex-shrink: 0;
   }
 
@@ -324,26 +384,36 @@ const contentParts = renderContent(content);
   .github-info {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px;
     min-width: 0;
   }
 
   .github-owner {
     font-size: 12px;
-    color: var(--sl-color-gray-3);
+    color: var(--post-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
   }
 
   .github-repo {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
-    color: var(--sl-color-accent);
+    color: var(--post-ink);
+  }
+
+  .github-action {
+    grid-column: 2;
+    font-size: 12px;
+    color: var(--post-accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   .event-card {
-    border: 1px solid var(--sl-color-hairline-light);
-    border-radius: 8px;
-    margin-bottom: 12px;
-    background-color: var(--sl-color-gray-6);
+    border: 1px solid var(--post-border);
+    border-radius: 14px;
+    margin-bottom: 14px;
+    background: color-mix(in srgb, var(--post-surface) 75%, var(--post-bg));
     overflow: hidden;
   }
 
@@ -354,24 +424,27 @@ const contentParts = renderContent(content);
   }
 
   .event-content {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr;
     gap: 12px;
-    padding: 12px;
+    padding: 14px;
   }
 
   .event-icon {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     flex-shrink: 0;
-    color: var(--sl-color-accent);
+    color: var(--post-accent);
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--post-accent) 14%, transparent);
   }
 
   .event-icon svg {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
   }
 
   .event-details {
@@ -382,92 +455,128 @@ const contentParts = renderContent(content);
   .event-title {
     font-size: 16px;
     font-weight: 600;
-    color: var(--sl-color-text);
+    color: var(--post-ink);
     margin-bottom: 8px;
+    font-family: "Fraunces", "Iowan Old Style", serif;
   }
 
   .event-datetime,
   .event-location {
     font-size: 13px;
-    color: var(--sl-color-gray-3);
+    color: var(--post-muted);
     margin-bottom: 4px;
   }
 
   .event-description {
     font-size: 13px;
-    color: var(--sl-color-text);
+    color: var(--post-ink);
     margin-top: 8px;
     line-height: 1.5;
   }
 
   .event-rsvp {
     font-size: 12px;
-    color: var(--sl-color-accent);
+    color: var(--post-accent);
     font-weight: 600;
-    margin-top: 8px;
-    padding: 4px 8px;
-    background-color: var(--sl-color-black);
-    border-radius: 4px;
-    display: inline-block;
+    margin-top: 10px;
+    padding: 4px 10px;
+    background: color-mix(in srgb, var(--post-accent) 20%, transparent);
+    border-radius: 999px;
+    display: inline-flex;
   }
 
   .post-content {
     text-wrap: balance;
-    font-size: 14px;
-    line-height: 1.5;
-    color: var(--sl-color-text);
-    margin-bottom: 12px;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--post-ink);
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 1;
   }
 
   .mention {
-    color: var(--sl-color-accent);
+    color: var(--post-accent);
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   .mention:hover {
     text-decoration: underline;
   }
 
+  .post-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+  }
+
   .reactions {
     display: flex;
     gap: 8px;
-    margin-bottom: 8px;
     flex-wrap: wrap;
   }
 
   .reaction-button {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 4px;
-    padding: 4px 10px;
-    border: 1px solid var(--sl-color-hairline-light);
-    border-radius: 16px;
-    background-color: var(--sl-color-black);
+    gap: 6px;
+    padding: 6px 12px;
+    border: 1px solid var(--post-border);
+    border-radius: 999px;
+    background: var(--post-surface);
     cursor: pointer;
-    font-size: 14px;
-    transition: all 0.2s;
+    font-size: 13px;
+    transition: transform 0.2s ease, border-color 0.2s ease,
+      background-color 0.2s ease;
   }
 
   .reaction-button.highlighted {
-    background-color: var(--sl-color-accent-low);
+    background: color-mix(in srgb, var(--post-accent) 20%, var(--post-surface));
+    border-color: color-mix(in srgb, var(--post-accent) 60%, transparent);
   }
 
   .reaction-button:hover {
-    background-color: var(--sl-color-accent-low);
-    border-color: var(--sl-color-accent);
+    transform: translateY(-1px);
+    border-color: var(--post-accent);
+  }
+
+  .reaction-button:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--post-accent) 70%, white);
+    outline-offset: 2px;
+  }
+
+  .emoji {
+    font-size: 15px;
   }
 
   .count {
     font-size: 12px;
-    color: var(--sl-color-gray-3);
+    color: var(--post-muted);
+    font-weight: 600;
   }
 
   .comment-count {
-    font-size: 13px;
-    color: var(--sl-color-gray-3);
-    margin-top: 8px;
-    padding-top: 8px;
-    border-top: 1px solid var(--sl-color-hairline-light);
+    font-size: 12px;
+    color: var(--post-muted);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reaction-button,
+    .github-preview {
+      transition: none;
+    }
+
+    .reaction-button:hover,
+    .github-preview:hover {
+      transform: none;
+    }
   }
 </style>
