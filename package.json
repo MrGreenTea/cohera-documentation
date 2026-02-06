@@ -11,9 +11,9 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^12.6.10",
-    "@astrojs/starlight": "^0.36.1",
-    "astro": "^5.6.1",
+    "@astrojs/cloudflare": "^12.6.12",
+    "@astrojs/starlight": "^0.37.6",
+    "astro": "^5.17.1",
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-svelte": "^3.4.0",
